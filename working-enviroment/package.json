@@ -1,0 +1,36 @@
+{
+  "name": "working-enviroment",
+  "version": "1.0.0",
+  "description": " \"Browser based game\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d dist",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dzuba110729/ajs-homeworks.git"
+  },
+  "keywords": [
+    "game"
+  ],
+  "author": "Dzyuba",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dzuba110729/ajs-homeworks/issues"
+  },
+  "homepage": "https://github.com/Dzuba110729/ajs-homeworks#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
+    "eslint": "^8.26.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslist": "^1.0.0-beta.1"
+  },
+  "dependencies": {
+    "core-js": "^3.26.0"
+  }
+}
