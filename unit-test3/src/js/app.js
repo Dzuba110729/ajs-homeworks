@@ -1,9 +1,12 @@
-export default function healthStatus(person) {
-	if (person.health > 50) {
-		return 'healthy';
+import fetchData from './http';
+
+export default function getLevel(userId) {
+	const response = fetchData(`https://server/user/${userId}`);
+
+	// TODO: логика обработки
+	if (response.status === 'ok') {
+		return `Ваш текущий уровень: ${response.level}`;
 	}
-	if (person.health <= 50 && person.health >= 15) {
-		return 'wounded';
-	}
-	return 'critical';
+
+	return 'Информация об уровне временно недоступна';
 }

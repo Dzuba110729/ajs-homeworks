@@ -1,46 +1,27 @@
-import healthSort from '../app';
+import getLevel from '../app';
+import fetchData from '../http';
 
-test('Sort health status', () => {
-	const person = [
-		{ name: 'мечник', health: 10 },
-		{ name: 'маг', health: 100 },
-		{ name: 'лучник', health: 80 },
-	];
-	const received = healthSort(person);
-	const expected = [
-		{ name: 'маг', health: 100 },
-		{ name: 'лучник', health: 80 },
-		{ name: 'мечник', health: 10 },
-	];
-	expect(received).toEqual(expected);
+jest.mock('../http');
+
+beforeEach(() => {
+	jest.resetAllMocks();
 });
 
-test('Sort health status', () => {
-	const person = [
-		{ name: 'мечник', health: 10 },
-		{ name: 'маг', health: 100 },
-		{ name: 'лучник', health: 80 },
-	];
-	const received = healthSort(person);
-	const expected = [
-		{ name: 'маг', health: 100 },
-		{ name: 'лучник', health: 80 },
-		{ name: 'мечник', health: 10 },
-	];
-	expect(received).not.toBe(expected);
+test('getLevel send', () => {
+	fetchData.mockReturnValue('{}');
+	getLevel(1);
+	expect(fetchData).toBeCalledTimes(1);
+	expect(fetchData).toBeCalledWith('https://server/user/1');
 });
 
-test('Sort health status', () => {
-	const person = [
-		{ name: 'мечник', health: 0 },
-		{ name: 'маг', health: 80 },
-		{ name: 'лучник', health: -1 },
-	];
-	const received = healthSort(person);
-	const expected = [
-		{ name: 'маг', health: 80 },
-		{ name: 'мечник', health: 0 },
-		{ name: 'лучник', health: -1 },
-	];
-	expect(received).toEqual(expected);
+test('getLevel ok', () => {
+	fetchData.mockReturnValue({ status: 'ok', level: '2' });
+	const result = getLevel(1);
+	expect(result).toBe('Ваш текущий уровень: 2');
+});
+
+test('getLevel false', () => {
+	fetchData.mockReturnValue({ status: 'false' });
+	const result = getLevel(1);
+	expect(result).toBe('Информация об уровне временно недоступна');
 });
